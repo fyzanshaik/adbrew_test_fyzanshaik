@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pyo
+*.pyd
+*.env
+*.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+db.sqlite3
+*.sqlite3
+
+# Django
+*.log
+staticfiles/
+media/
+local_settings.py
+db.sqlite3
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+.DS_Store
+
+# React
+node_modules/
+build/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env
+.eslintcache
+
+# VSCode
+.vscode/
+
+# Custom project paths
+src/app/.eslintcache
+src/db/
+src/rest/mydatabase
+src/rest/rest/__pycache__/
+
+# OS generated files
+.DS_Store
+Thumbs.db

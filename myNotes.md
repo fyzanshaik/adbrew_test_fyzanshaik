@@ -3,37 +3,37 @@
 ## Pre-Development Setup
 
 - [x] Clone repository (DO NOT FORK)
-- [ ] Set environment variable: `export ADBREW_CODEBASE_PATH="{path_to_repository}/test/src"`
-- [ ] Build containers: `docker-compose build`
-- [ ] Start containers: `docker-compose up -d`
-- [ ] Verify setup: Check `docker ps` shows all 3 containers running
-- [ ] Test access: http://localhost:3000 and http://localhost:8000/todos
+- [x] Set environment variable: `export ADBREW_CODEBASE_PATH="{path_to_repository}/"`
+- [x] Build containers: `docker-compose build`
+- [x] Start containers: `docker-compose up -d`
+- [x] Verify setup: Check `docker ps` shows all 3 containers running
+- [x] Test access: http://localhost:3000 and http://localhost:8000/todos
 
 ## Backend Implementation (Django)
 
 ### TodoListView GET Method
 
-- [ ] Add collection reference: `todos = db.todos` or `db['todos']`
-- [ ] Implement: `list(todos.find())`
-- [ ] Handle MongoDB's ObjectId serialization (convert to string)
-- [ ] Return proper JSON response with status 200
-- [ ] Add error handling for database connection issues
+- [x] Add collection reference: `todos = db.todos` or `db['todos']`
+- [x] Implement: `list(todos.find())`
+- [x] Handle MongoDB's ObjectId serialization (convert to string)
+- [x] Return proper JSON response with status 200
+- [x] Add error handling for database connection issues
 
 ### TodoListView POST Method
 
-- [ ] Extract todo description from `request.data`
-- [ ] Create new todo dict: `{"description": description}`
-- [ ] Insert using: `todos.insert_one(new_todo)`
-- [ ] Return created todo with generated ID
-- [ ] Add error handling for invalid data/database issues
-- [ ] Return proper status code (201 for created)
+- [x] Extract todo description from `request.data`
+- [x] Create new todo dict: `{"description": description}`
+- [x] Insert using: `todos.insert_one(new_todo)`
+- [x] Return created todo with generated ID
+- [x] Add error handling for invalid data/database issues
+- [x] Return proper status code (201 for created)
 
 ### Error Handling
 
 - [ ] Handle MongoDB connection errors
-- [ ] Handle invalid request data
-- [ ] Return appropriate HTTP status codes
-- [ ] Provide meaningful error messages
+- [x] Handle invalid request data
+- [x] Return appropriate HTTP status codes
+- [x] Provide meaningful error messages
 
 ## Frontend Implementation (React)
 
