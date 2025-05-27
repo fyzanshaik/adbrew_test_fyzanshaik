@@ -1,10 +1,17 @@
 import { useState, useEffect } from 'react';
-import { fetchTodos, createTodo } from '../api/todoApi';
+import {
+  fetchTodos,
+  createTodo,
+  deleteTodo,
+  updateTodoCompleted,
+} from '../api/todoApi';
 
 export function useTodos() {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [submitting, setSubmitting] = useState(false);
+  const [adding, setAdding] = useState(false);
+  const [updatingId, setUpdatingId] = useState(null);
+  const [deletingId, setDeletingId] = useState(null);
   const [error, setError] = useState(null);
 
   const updateTodosFromFetch = async (fetchResult) => {
@@ -32,7 +39,7 @@ export function useTodos() {
   }, []);
 
   async function addTodo(description) {
-    setSubmitting(true);
+    setAdding(true);
     setError(null);
     const result = await createTodo(description);
     if (result.success) {
@@ -41,8 +48,53 @@ export function useTodos() {
     } else {
       setError(result.error);
     }
-    setSubmitting(false);
+    setAdding(false);
   }
 
-  return { todos, loading, submitting, error, addTodo };
+  async function removeTodo(todoId) {
+    setDeletingId(todoId);
+    setError(null);
+    const result = await deleteTodo(todoId);
+    if (result.success) {
+      const fetchResult = await fetchTodos();
+      await updateTodosFromFetch(fetchResult);
+    } else {
+      setError(result.error);
+    }
+    setDeletingId(null);
+  }
+
+  async function toggleTodoCompleted(todoId, completed) {
+    setUpdatingId(todoId);
+    setError(null);
+    const result = await updateTodoCompleted(todoId, completed);
+    if (result.success) {
+      const fetchResult = await fetchTodos();
+      await updateTodosFromFetch(fetchResult);
+    } else {
+      setError(result.error);
+    }
+    setUpdatingId(null);
+  }
+
+  async function refreshTodos() {
+    setLoading(true);
+    setError(null);
+    const result = await fetchTodos();
+    await updateTodosFromFetch(result);
+    setLoading(false);
+  }
+
+  return {
+    todos,
+    loading,
+    adding,
+    updatingId,
+    deletingId,
+    error,
+    addTodo,
+    removeTodo,
+    toggleTodoCompleted,
+    refreshTodos,
+  };
 }
