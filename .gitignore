@@ -52,3 +52,5 @@ src/rest/rest/__pycache__/
 # OS generated files
 .DS_Store
 Thumbs.db
+
+myNotes.md
