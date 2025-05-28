@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
   fetchTodos,
   createTodo,
@@ -38,7 +38,7 @@ export function useTodos() {
     return () => { isMounted = false; };
   }, []);
 
-  async function addTodo(description) {
+  const addTodo = useCallback(async (description) => {
     setAdding(true);
     setError(null);
     const result = await createTodo(description);
@@ -49,9 +49,9 @@ export function useTodos() {
       setError(result.error);
     }
     setAdding(false);
-  }
+  }, []);
 
-  async function removeTodo(todoId) {
+  const removeTodo = useCallback(async (todoId) => {
     setDeletingId(todoId);
     setError(null);
     const result = await deleteTodo(todoId);
@@ -62,9 +62,9 @@ export function useTodos() {
       setError(result.error);
     }
     setDeletingId(null);
-  }
+  }, []);
 
-  async function toggleTodoCompleted(todoId, completed) {
+  const toggleTodoCompleted = useCallback(async (todoId, completed) => {
     setUpdatingId(todoId);
     setError(null);
     const result = await updateTodoCompleted(todoId, completed);
@@ -75,15 +75,15 @@ export function useTodos() {
       setError(result.error);
     }
     setUpdatingId(null);
-  }
+  }, []);
 
-  async function refreshTodos() {
+  const refreshTodos = useCallback(async () => {
     setLoading(true);
     setError(null);
     const result = await fetchTodos();
     await updateTodosFromFetch(result);
     setLoading(false);
-  }
+  }, []);
 
   return {
     todos,
